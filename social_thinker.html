@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Social Thinker — Glass Premium (v2)</title>
+  <meta name="description" content="Social Thinker — Design-led digital marketing for hotels, salons, resorts, real estate and local businesses. Creative + performance + websites." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#f8fbff">
+  <style>
+    :root{
+      --bg-1:#eef6ff; --bg-2:#f8fbff; --accent1:#1d4ed8; --accent2:#38bdf8; --accent3:#7c3aed; --muted:#52606a; --card:rgba(255,255,255,0.64);
+      --glass-blur:16px; --radius:18px; --maxw:1250px; --glass-border:rgba(99,102,241,0.12);
+      font-family:Inter, system-ui, -apple-system, 'Space Grotesk', sans-serif;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg-1),var(--bg-2));color:#07142a;-webkit-font-smoothing:antialiased}
+    a{text-decoration:none;color:var(--accent1)}
+    .container{max-width:var(--maxw);margin:0 auto;padding:28px}
+
+    /* sticky translucent navbar */
+    header{position:sticky;top:12px;z-index:120}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:10px;background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.44));backdrop-filter:blur(var(--glass-blur));border-radius:14px;border:1px solid var(--glass-border)}
+    .brand{display:flex;gap:14px;align-items:center}
+    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent2),var(--accent3));display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:18px}
+    nav ul{display:flex;gap:18px;align-items:center;margin:0;padding:0;list-style:none}
+    .cta{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:white;padding:10px 14px;border-radius:12px;font-weight:700;box-shadow:0 10px 30px rgba(29,78,216,0.12)}
+    .burger{display:none;border:0;background:none;font-size:20px;color:var(--accent1)}
+
+    /* hero */
+    .hero{display:grid;grid-template-columns:1fr 460px;gap:28px;align-items:center;padding:34px 6px;position:relative;overflow:visible}
+    .hero .eyebrow{color:var(--muted);font-weight:600;letter-spacing:0.6px}
+    .hero h1{font-size:44px;margin:12px 0;line-height:1.02;font-family:'Space Grotesk',sans-serif}
+    .hero p{color:var(--muted);max-width:64ch}
+
+    /* animated background blob */
+    .hero-bg-blob{position:absolute;right:-120px;top:-80px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle at 30% 20%, rgba(56,189,248,0.16), rgba(124,58,237,0.1));filter:blur(70px);pointer-events:none;transform:translateZ(0);z-index:0}
+    .hero-card{position:relative;z-index:2}
+
+    .glass{background:var(--card);padding:20px;border-radius:var(--radius);box-shadow:0 18px 50px rgba(14,30,37,0.06);border:1px solid var(--glass-border);backdrop-filter:blur(var(--glass-blur));}
+    .glow-border{position:relative}
+    .glow-border:before{content:'';position:absolute;inset:-6px;border-radius:22px;background:linear-gradient(90deg,var(--accent2),var(--accent3));filter:blur(20px);opacity:0.28;z-index:-1}
+
+    /* services */
+    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px}
+    .service h3{margin:8px 0}
+    .service p{color:var(--muted)}
+
+    /* portfolio gallery */
+    .portfolio{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+    .port-item{height:150px;border-radius:12px;overflow:hidden;position:relative;background:linear-gradient(180deg,#ffffffcc,#f1f5f9c9);display:flex;flex-direction:column;justify-content:flex-end;padding:14px}
+
+    /* pricing */
+    .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+    .plan{padding:16px;border-radius:12px;border:1px solid rgba(48, 3, 121, 0.04)}
+
+    /* testimonials slider */
+    .testi-wrap{position:relative;margin-top:12px}
+    .testi-slider{display:flex;gap:12px;overflow:hidden}
+    .testi{min-width:300px;padding:16px;border-radius:12px}
+    .testi-controls{display:flex;gap:8px;margin-top:8px}
+
+    /* contact */
+    .contact{display:grid;grid-template-columns:1fr 420px;gap:18px;margin-top:18px}
+    input,textarea,select{background:transparent;border:1px solid rgba(11,18,32,0.06);padding:12px;border-radius:10px;color:inherit}
+    button[type=submit]{padding:12px;border-radius:12px;border:0;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:white;font-weight:700}
+
+    /* floating CTA & badges */
+    .float-cta{position:fixed;right:18px;bottom:18px;z-index:140;display:flex;flex-direction:column;gap:10px}
+    .wa{width:56px;height:56px;border-radius:14px;background:linear-gradient(180deg,var(--accent2),var(--accent1));display:flex;align-items:center;justify-content:center;color:white;box-shadow:0 12px 30px rgba(29,78,216,0.16)}
+
+    /* reveal animations */
+    .reveal{opacity:0;transform:translateY(15px);transition:opacity .6s ease,transform .6s ease}
+    .reveal.show{opacity:1;transform:none}
+    .floaty{animation:float 6s ease-in-out infinite}
+    @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-10px)}100%{transform:translateY(0)}}
+
+    /* buttons hover */
+    .cta:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(29,78,216,0.18)}
+
+    /* responsive */
+    @media(max-width:1000px){.hero{grid-template-columns:1fr}.services{grid-template-columns:repeat(2,1fr)}.portfolio{grid-template-columns:repeat(2,1fr)}.plans{grid-template-columns:1fr}.contact{grid-template-columns:1fr}}
+    @media(max-width:520px){nav ul{display:none}.burger{display:inline-flex}.logo{width:44px;height:44px}.hero h1{font-size:26px}.hero{padding:18px 6px}}
+
+    footer{margin-top:32px;padding:18px 12px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="nav">
+        <div class="brand">
+          <div class="logo">ST</div>
+          <div>
+            <div style="font-size:15px;font-weight:700">Social Thinker</div>
+            <div style="font-size:12px;color:var(--muted)">Design-led digital marketing for local businesses</div>
+          </div>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <div style="display:flex;gap:12px;align-items:center">
+          <a class="cta" href="#contact">Get Quote</a>
+          <button class="burger" aria-label="menu" onclick="toggleMenu()">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="hero-bg-blob" aria-hidden="true"></div>
+      <section class="hero">
+        <div class="hero-card">
+          <div class="eyebrow reveal">Strategy • Creative • Growth</div>
+          <h1 class="reveal">Social Thinker — We turn local businesses into loved brands.</h1>
+          <p class="reveal">We combine design-first social content, performance advertising and conversion-optimised landing pages to drive more bookings, leads and walk-ins. Trusted by hotels, salons and realtors across India.</p>
+
+          <div class="kpis reveal" style="display:flex;gap:12px;margin-top:18px">
+            <div class="glass" style="padding:10px 12px;border-radius:12px;font-weight:700">+30% Direct Bookings</div>
+            <div class="glass" style="padding:10px 12px;border-radius:12px;font-weight:700">Avg. 3x ROAS</div>
+            <div class="glass" style="padding:10px 12px;border-radius:12px;font-weight:700">Rapid Creative Packs</div>
+          </div>
+
+          <div style="margin-top:18px;display:flex;gap:12px;align-items:center">
+            <a class="cta reveal" href="#contact">Free Strategy Call</a>
+            <a class="glass reveal" href="#work" style="display:inline-flex;align-items:center;padding:10px 14px;border-radius:12px">See Case Studies</a>
+          </div>
+
+          <div class="services" id="services">
+            <div class="service glass reveal">
+              <h3>Social Media Management</h3>
+              <p>Platform-specific content (Reels, Carousels, Stories), weekly calendar, captionwriting in English/Hinglish, community management and monthly reporting tied to real KPIs (bookings, calls, leads).</p>
+            </div>
+            <div class="service glass reveal">
+              <h3>Performance Advertising</h3>
+              <p>Campaigns built for measurable results — audience research, creative A/B testing, tracking (pixels & events) and cost-focused optimisation to lower CPL/CAC.</p>
+            </div>
+            <div class="service glass reveal">
+              <h3>Websites & Funnels</h3>
+              <p>Fast mobile-first landing pages, booking funnels, payment links and CRM hooks. We build pages that convert visitors into customers.</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="glass glow-border floaty" style="min-height:260px;display:flex;flex-direction:column;justify-content:space-between">
+          <div>
+            <strong style="font-size:18px">Limited Starter</strong>
+            <p style="color:var(--muted);margin-top:8px">Strategy + 10 creatives + landing page — <strong>₹11,999</strong> (one-time). Quick launch in 7 days.</p>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-size:20px;font-weight:700">No long contracts</div>
+              <div style="font-size:12px;color:var(--muted)">Month-to-month • Scalable packages</div>
+            </div>
+            <button class="cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book Call</button>
+          </div>
+        </aside>
+      </section>
+
+      <!-- work -->
+      <section id="work" style="margin-top:28px">
+        <h2 class="reveal">Selected Work</h2>
+        <div class="portfolio" style="margin-top:12px">
+          <div class="port-item reveal">
+            <strong>Seaside Resort — Direct Bookings</strong>
+            <div class="tag">Meta Ads + Landing Page • Result: +34% direct bookings in 8 weeks</div>
+          </div>
+          <div class="port-item reveal">
+            <strong>Glow Salon — Reels Growth</strong>
+            <div class="tag">Organic + Micro-Influencer • Result: 3x walk-ins from promo</div>
+          </div>
+          <div class="port-item reveal">
+            <strong>City Properties — Lead Gen</strong>
+            <div class="tag">Lead Ads + CRM • Result: 60 qualified leads / month</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- pricing -->
+      <section id="pricing" style="margin-top:28px">
+        <h2 class="reveal">Pricing</h2>
+        <p class="reveal" style="color:var(--muted);margin-top:6px">Transparent pricing built for growth. Start small, scale quickly — we focus on ROI.</p>
+        <div class="plans" style="margin-top:12px">
+          <div class="plan glass reveal">
+            <h3>Starter</h3>
+            <div class="price">₹11,999 (one-time)</div>
+            <ul style="color:var(--muted)">
+              <li>Strategy + 10 creatives</li>
+              <li>Landing page & campaign setup</li>
+              <li>1 week launch</li>
+            </ul>
+          </div>
+          <div class="plan glass reveal">
+            <h3>Growth</h3>
+            <div class="price">₹11,999 / month</div>
+            <ul style="color:var(--muted)">
+              <li>Social posting 12 / mo</li>
+              <li>Ads + 2 campaigns / mo</li>
+              <li>Monthly optimization</li>
+            </ul>
+          </div>
+          <div class="plan glass reveal">
+            <h3>Pro</h3>
+            <div class="price">Custom</div>
+            <ul style="color:var(--muted)">
+              <li>Dedicated manager</li>
+              <li>Full creative production</li>
+              <li>Advanced analytics</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- testimonials slider -->
+      <section style="margin-top:28px">
+        <h2 class="reveal">What Clients Say</h2>
+        <div class="testi-wrap">
+          <div class="testi-slider" id="testiSlider">
+            <div class="testi glass reveal">
+              <strong>Rohit — Hotel Owner</strong>
+              <p style="color:var(--muted);margin-top:8px">"Social Thinker rebuilt our booking funnel and the results were immediate — bookings rose and cost per acquisition dropped."</p>
+            </div>
+            <div class="testi glass reveal">
+              <strong>Nisha — Salon Founder</strong>
+              <p style="color:var(--muted);margin-top:8px">"The content quality and local targeting brought more clients to our door. Very professional team."</p>
+            </div>
+            <div class="testi glass reveal">
+              <strong>Priya — Realtor</strong>
+              <p style="color:var(--muted);margin-top:8px">"Leads improved in both volume and quality after the new campaign. Great reporting too."</p>
+            </div>
+          </div>
+          <div class="testi-controls">
+            <button onclick="prevTesti()">←</button>
+            <button onclick="nextTesti()">→</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- contact -->
+      <section id="contact" style="margin-top:28px">
+        <h2 class="reveal">Start a Project</h2>
+        <div class="contact" style="margin-top:12px">
+          <form class="glass" id="contactForm" onsubmit="handleSubmit(event)">
+            <input id="c_name" placeholder="Full name*" required aria-label="Full name" />
+            <input id="c_phone" placeholder="Phone / WhatsApp*" required aria-label="Phone" />
+            <input id="c_email" type="email" placeholder="Email" aria-label="Email" />
+            <select id="c_service" aria-label="Service">
+              <option value="">Select service</option>
+              <option>Social Media Management</option>
+              <option>Paid Campaigns</option>
+              <option>Website & Funnels</option>
+              <option>Branding & Creatives</option>
+            </select>
+            <textarea id="c_message" rows="4" placeholder="Tell us about your goals & budget (optional)" aria-label="Message"></textarea>
+            <button type="submit">Request Quote</button>
+            <div id="c_msg" style="color:var(--muted);font-size:13px;margin-top:8px"></div>
+          </form>
+
+          <aside class="glass">
+            <strong>Contact Details</strong>
+            <div style="color:var(--muted);margin-top:8px">Email: hello@socialthinker.example<br>Phone: +91 9XXXXXXXX</div>
+            <div style="margin-top:12px;color:var(--muted)"><strong>Service area:</strong> PAN-India • On-site (selected cities) • Remote</div>
+            <div style="margin-top:12px"><strong>Follow:</strong> <a href="#">Instagram</a> • <a href="#">LinkedIn</a></div>
+          </aside>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <div>
+        <strong>Social Thinker</strong>
+        <div style="font-size:13px;color:var(--muted)">Design-led growth for small businesses</div>
+      </div>
+      <div style="color:var(--muted)">© <span id="year"></span> Social Thinker</div>
+    </footer>
+  </div>
+
+  <!-- floating CTA -->
+  <div class="float-cta">
+    <a class="wa" href="https://wa.me/919999999999" target="_blank" aria-label="WhatsApp">💬</a>
+  </div>
+
+  <script>
+    document.getElementById('year').innerText = new Date().getFullYear();
+    function toggleMenu(){const ul=document.querySelector('nav ul'); if(!ul) return; ul.style.display = ul.style.display==='flex'?'none':'flex'}
+
+    // reveal on scroll (IntersectionObserver)
+    const io = new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('show');io.unobserve(entry.target)}})},{threshold:0.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+    // subtle parallax float for hero aside
+    document.addEventListener('mousemove', (e)=>{
+      document.querySelectorAll('.floaty').forEach(el=>{
+        const rect = el.getBoundingClientRect();
+        const dx = (e.clientX - (rect.left + rect.width/2)) / rect.width;
+        const dy = (e.clientY - (rect.top + rect.height/2)) / rect.height;
+        el.style.transform = `translate3d(${dx*8}px, ${-Math.abs(dy)*8}px, 0)`;
+      });
+    });
+
+    // Testimonial slider (simple)
+    const slider = document.getElementById('testiSlider');
+    let testiIndex = 0;
+    function showTesti(i){
+      const children = slider.children; const w = children[0].offsetWidth + 12; // gap
+      slider.style.transform = `translateX(${-(w*i)}px)`;
+    }
+    function nextTesti(){ testiIndex = Math.min(testiIndex+1, slider.children.length-1); showTesti(testiIndex); }
+    function prevTesti(){ testiIndex = Math.max(testiIndex-1, 0); showTesti(testiIndex); }
+
+    // Contact form demo storage
+    function handleSubmit(e){e.preventDefault(); const name=document.getElementById('c_name').value.trim(); const phone=document.getElementById('c_phone').value.trim(); if(!name||!phone){document.getElementById('c_msg').innerText='Name and phone required.'; return;} const data={name,phone,email:document.getElementById('c_email').value,service:document.getElementById('c_service').value,message:document.getElementById('c_message').value,ts:new Date().toISOString()}; const leads=JSON.parse(localStorage.getItem('st_v2_leads')||'[]'); leads.push(data); localStorage.setItem('st_v2_leads', JSON.stringify(leads)); document.getElementById('c_msg').innerText='Thanks — we will contact you shortly (demo).'; e.target.reset(); setTimeout(()=>document.getElementById('c_msg').innerText='',7000); }
+
+    // layout adjustments on load to handle slider width
+    window.addEventListener('load', ()=>{ if(slider && slider.children.length) showTesti(0)});
+  </script>
+</body>
+</html>
