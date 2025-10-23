@@ -160,6 +160,113 @@
           </div>
         </aside>
       </section>
+      <!-- ======= SERVICES SECTION ======= -->
+<section id="services" class="relative overflow-hidden py-24 bg-[#020617] text-white">
+  <!-- Parallax Background Layers -->
+  <div class="absolute inset-0 z-0">
+    <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#020617] via-[#071e34] to-[#020617] opacity-90"></div>
+    <div class="floating-glow absolute top-[20%] left-[10%] w-72 h-72 bg-blue-500/20 blur-3xl rounded-full animate-pulse"></div>
+    <div class="floating-glow absolute bottom-[10%] right-[10%] w-96 h-96 bg-sky-400/10 blur-3xl rounded-full animate-pulse-slow"></div>
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
+    <h2 class="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-sky-500 mb-8">
+      Elevate Your Digital Presence
+    </h2>
+    <p class="text-gray-300 text-lg max-w-3xl mx-auto mb-16 leading-relaxed">
+      At <strong>Social Thinker</strong>, we combine creativity and technology to transform your brand into a digital powerhouse.
+      We design experiences that attract, engage, and convert — across all platforms.
+    </p>
+
+    <!-- Service Cards Grid -->
+    <div class="grid md:grid-cols-3 gap-10">
+      <!-- CARD 1 -->
+      <div class="glass-3d-float group">
+        <div class="inner p-8">
+          <div class="text-sky-400 text-4xl mb-4">🚀</div>
+          <h3 class="text-2xl font-bold mb-3 text-blue-300 group-hover:text-sky-400 transition-colors">Social Media Marketing</h3>
+          <p class="text-gray-300">
+            From Meta to Instagram — we build campaigns that connect with audiences, create awareness, and drive real business growth.
+          </p>
+        </div>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="glass-3d-float group">
+        <div class="inner p-8">
+          <div class="text-sky-400 text-4xl mb-4">💡</div>
+          <h3 class="text-2xl font-bold mb-3 text-blue-300 group-hover:text-sky-400 transition-colors">Brand Strategy</h3>
+          <p class="text-gray-300">
+            We help your brand speak clearly with visual storytelling, professional identity design, and compelling brand positioning.
+          </p>
+        </div>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="glass-3d-float group">
+        <div class="inner p-8">
+          <div class="text-sky-400 text-4xl mb-4">🌐</div>
+          <h3 class="text-2xl font-bold mb-3 text-blue-300 group-hover:text-sky-400 transition-colors">Website Development</h3>
+          <p class="text-gray-300">
+            We craft futuristic, mobile-friendly, high-speed websites that make your brand unforgettable in every digital space.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= CSS ======= -->
+<style>
+  .glass-3d-float {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0, 100, 255, 0.1);
+    transition: all 0.5s ease;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+  .glass-3d-float:hover {
+    transform: translateY(-15px) rotateY(8deg) rotateX(4deg) scale(1.03);
+    box-shadow: 0 20px 60px rgba(0, 150, 255, 0.3);
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotateY(0deg); }
+    50% { transform: translateY(-10px) rotateY(3deg); }
+  }
+
+  .floating-glow {
+    animation: float 8s ease-in-out infinite alternate;
+  }
+  .animate-pulse-slow {
+    animation: pulse-slow 8s infinite;
+  }
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.05); }
+  }
+</style>
+
+<!-- ======= JS ======= -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.utils.toArray(".glass-3d-float").forEach((card, i) => {
+    gsap.from(card, {
+      scrollTrigger: { trigger: card, start: "top 85%" },
+      y: 80,
+      opacity: 0,
+      duration: 1.2,
+      delay: i * 0.2,
+      ease: "power3.out",
+    });
+  });
+</script>
+
 
       <!-- work -->
       <section id="work" style="margin-top:28px">
@@ -262,7 +369,7 @@
 
           <aside class="glass">
             <strong>Contact Details</strong>
-            <div style="color:var(--muted);margin-top:8px">Email: hello@socialthinker.example<br>Phone: +91 9XXXXXXXX</div>
+            <div style="color:var(--muted);margin-top:8px">Email: Socialthinker@gmail.com<br>Phone: +91 8815883226</div>
             <div style="margin-top:12px;color:var(--muted)"><strong>Service area:</strong> PAN-India • On-site (selected cities) • Remote</div>
             <div style="margin-top:12px"><strong>Follow:</strong> <a href="#">Instagram</a> • <a href="#">LinkedIn</a></div>
           </aside>
@@ -282,7 +389,7 @@
 
   <!-- floating CTA -->
   <div class="float-cta">
-    <a class="wa" href="https://wa.me/919999999999" target="_blank" aria-label="WhatsApp">💬</a>
+    <a class="wa" href="https://wa.me/918815883226" target="_blank" aria-label="WhatsApp">💬</a>
   </div>
 
   <script>
